@@ -3,8 +3,18 @@ Go's modified log package with an option to set a loglevel, which will filter th
 (This is the modified code from GO's original `log` package at https://github.com/golang/go/tree/master/src/log (version 1.6.2)), and the logic borrowed from https://github.com/Sirupsen/logrus package.
 
 ##### Why!
-I was trying to find a way to log `filename` and `line number` using logrus, and I failed to get a workaroundd. Since Go's native `log` package already provides this feature, and I am not using advanced features of `logrus` like `SetFormatter` or `hooks`, I just borrowed and incorporated the idea of using a `loglevel`.
-Newly added functions like `(Error|Warn|Info|Debug)ln(), (Error|Warn|Info|Debug)f() and (Error|Warn|Info|Debug)()` will only output logs based on the configured loglevel with the helper function `SetLogLevel()`. Accepted log levels are `ErrorLevel, WarnLevel, InfoLevel and DebugLevel` which are of values `int 0, 1, 2, 3` respectively.
+I was trying to find a way to log `filename` and `line number` using logrus, but I failed to get a workaround. I am not using advanced features of `logrus` like `SetFormatter` or `hooks`. `Go`'s native `log` package already provides a feature to log filename and line numbers but it lacks setting a loglevel for filtering logs. I just borrowed and incorporated the idea of using a `loglevel`.
+Newly added methods for `*Logger` like `(Error|Warn|Info|Debug)ln(), (Error|Warn|Info|Debug)f() and (Error|Warn|Info|Debug)()` will only output logs based on the configured loglevel with the helper function `SetLogLevel()`. Accepted log levels are `ErrorLevel, WarnLevel, InfoLevel and DebugLevel` which are of values `int 0, 1, 2, 3` respectively.
+
+Default value of `loglevel` at the time of initing the `*Logger` is set to the lowest level, which is `ErrorLevel`.
+
+##### Reference when setting loglevel:
+
+`logger.SetLogLevel(log.ErrorLevel)` will log only Errors using the method log.Error*(). Any calls to `log.Warn*()`, `log.Info*()` and `log.Debug*()` will not be logged.
+`logger.SetLogLevel(log.WarnLevel)` will log Errors and Warnings. Rest are not logged.
+`logger.SetLogLevel(log.InfoLevel)` will log Errors, Warnings and Info. Rest are not logged.
+`logger.SetLogLevel(log.DebugLevel)` will log Errors, Warnings, Info and Debug.
+
 
 ##### Example:
 

@@ -12,6 +12,7 @@ import (
 
 func ExampleLogger() {
 	var buf bytes.Buffer
+	log.Println()
 	logger := log.New(&buf, "logger: ", log.Lshortfile)
 	//file, _ := os.OpenFile("/tmp/testlog.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	//logger.SetOutput(file)
