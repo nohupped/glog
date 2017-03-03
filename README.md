@@ -3,7 +3,7 @@ Go's modified log package with an option to set a loglevel, which will filter th
 (This is the modified code from GO's original `log` package at https://github.com/golang/go/tree/master/src/log (version 1.6.2)), and the logic borrowed from https://github.com/Sirupsen/logrus package.
 
 ##### Why!
-I was trying to find a way to log `filename` and `line number` using logrus, but I failed to get a workaround. I am not using advanced features of `logrus` like `SetFormatter` or `hooks`. `Go`'s native `log` package already provides a feature to log filename and line numbers but it lacks setting a loglevel for filtering logs. I just borrowed and incorporated the idea of using a `loglevel`.
+I was trying to find a way to log `filename` and `line number` using logrus for obvious debugging purpose, but I failed to get a workaround. I am not using advanced features of `logrus` like `SetFormatter` or `hooks`. `Go`'s native `log` package already provides a feature to log filename and line numbers but it lacks setting a loglevel for filtering logs. I just borrowed and incorporated the idea of using a `loglevel`.
 Newly added methods for `*Logger` like `(Error|Warn|Info|Debug)ln(), (Error|Warn|Info|Debug)f() and (Error|Warn|Info|Debug)()` will only output logs based on the configured loglevel with the helper function `SetLogLevel()`. Accepted log levels are `ErrorLevel, WarnLevel, InfoLevel and DebugLevel` which are of values `int 0, 1, 2, 3` respectively.
 
 Default value of `loglevel` at the time of initing the `*Logger` is set to the lowest level, which is `ErrorLevel`.
