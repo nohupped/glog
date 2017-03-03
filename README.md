@@ -46,10 +46,10 @@ func main() {
 	fmt.Print(&buf)
 
 	// Output:
-	// logger: example_test.go:19: ERROR: Hello, this is 1 Error from Errorf()!
-	// logger: example_test.go:20: ERROR: Hello, this is 1 Error from Error()!
-	// logger: example_test.go:23: ERROR: Hello, This is Error from Errorln!
-	// logger: example_test.go:24: WARN: Hello, This is Warn from Warnln!
-	// logger: example_test.go:25: INFO: Hello, This is Info from Infoln!
+	// logger: main.go:19: ERROR: Hello, this is 1 Error from Errorf()!
+	// logger: main.go:20: ERROR: Hello, this is 1 Error from Error()!
+	// logger: main.go:23: ERROR: Hello, This is Error from Errorln!
+	// logger: main.go:24: WARN: Hello, This is Warn from Warnln!
+	// logger: main.go:25: INFO: Hello, This is Info from Infoln!
 
 ```
