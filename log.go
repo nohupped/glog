@@ -42,17 +42,18 @@ const (
 	LstdFlags     = Ldate | Ltime // initial values for the standard logger
 )
 
-// A Logger represents an active logging object that generates lines of
-// output to an io.Writer.  Each logging operation makes a single call to
-// the Writer's Write method.  A Logger can be used simultaneously from
-// multiple goroutines; it guarantees to serialize access to the Writer.
-
+// Constants for defining loglevels
 const (
 	ErrorLevel = iota // 0
 	WarnLevel // 1
 	InfoLevel // 2
 	DebugLevel // 3
 )
+
+// A Logger represents an active logging object that generates lines of
+// output to an io.Writer.  Each logging operation makes a single call to
+// the Writer's Write method.  A Logger can be used simultaneously from
+// multiple goroutines; it guarantees to serialize access to the Writer.
 type Logger struct {
 	mu     sync.Mutex // ensures atomic writes; protects the following fields
 	prefix string     // prefix to write at beginning of each line
