@@ -13,14 +13,25 @@ import (
 func ExampleLogger() {
 	var buf bytes.Buffer
 	logger := log.New(&buf, "logger: ", log.Lshortfile)
-	logger.Warnln("Hello, This is Error!") // This will not print because the default loglevel is set to ErrorLevel.
-	logger.SetLogLevel(log.WarnLevel)
-	logger.Errorln("Hello, This is Error!")
-	logger.Warnln("Hello, This is Warn!")
-	logger.Infoln("Hello, This is Info!") // This will not print because loglevel is set to WarnLevel
-	logger.Debugln("Hello, This is Debug!") // This will not print because loglevel is set to WarnLevel
+	//file, _ := os.OpenFile("/tmp/testlog.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	//logger.SetOutput(file)
+	strfn := "Errorf()!"
+	logger.Errorf("Hello, this is %d Error from %s", 1, strfn)
+	logger.Error("Hello, this is 1 Error from Error()!")
+	logger.Warnln("Hello, This is from Warnln!") // This will not print because the default loglevel is set to ErrorLevel.
+	logger.SetLogLevel(log.InfoLevel)
+	logger.Errorln("Hello, This is Error from Errorln!")
+	logger.Warnln("Hello, This is Warn from Warnln!")
+	logger.Infoln("Hello, This is Info from Infoln!")
+	logger.Debugln("Hello, This is Debug from Debugln!") // This will not print because loglevel is set to InfoLevel
+
 	fmt.Print(&buf)
 	// Output:
-	// logger: example_test.go:18: ERROR: Hello, This is Error!
-	// logger: example_test.go:19: WARN: Hello, This is Warn!
+	// logger: example_test.go:19: ERROR: Hello, this is 1 Error from Errorf()!
+	// logger: example_test.go:20: ERROR: Hello, this is 1 Error from Error()!
+	// logger: example_test.go:23: ERROR: Hello, This is Error from Errorln!
+	// logger: example_test.go:24: WARN: Hello, This is Warn from Warnln!
+	// logger: example_test.go:25: INFO: Hello, This is Info from Infoln!
+
+
 }
