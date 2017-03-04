@@ -10,7 +10,7 @@ Default value of `loglevel` at the time of initing the `*Logger` is set to the l
 
 ##### Reference when setting loglevel:
 
-`logger.SetLogLevel(log.ErrorLevel)` will log only Errors using the method log.Error*(). Any calls to `log.Warn*()`, `log.Info*()` and `log.Debug*()` will not be logged.
+`logger.SetLogLevel(log.ErrorLevel)` will log only Errors using the method `log.Error*()`. Any calls to `log.Warn*()`, `log.Info*()` and `log.Debug*()` will not be logged unless the `loglevel` is changed.
 
 `logger.SetLogLevel(log.WarnLevel)` will log Errors and Warnings. Rest are not logged.
 
