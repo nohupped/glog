@@ -2,12 +2,15 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package log implements a simple logging package. It defines a type, Logger,
+// Package glog implements a simple logging package. It defines a type, Logger,
 // with methods for formatting output. It also has a predefined 'standard'
 // Logger accessible through helper functions Print[f|ln], Fatal[f|ln], and
 // Panic[f|ln], which are easier to use than creating a Logger manually.
 // That logger writes to standard error and prints the date and time
 // of each logged message.
+// Helper functions (Error|Warn|Info|Debug)ln(), (Error|Warn|Info|Debug)f() and
+// (Error|Warn|Info|Debug)() writes to log only if it meets the required loglevel (ErrorLevel,
+// WarnLevel, InfoLevel, and DebugLevel).
 // The Fatal functions call os.Exit(1) after writing the log message.
 // The Panic functions call panic after writing the log message.
 package glog
