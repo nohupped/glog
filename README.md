@@ -11,8 +11,11 @@ Default value of `loglevel` at the time of initing the `*Logger` is set to the l
 ##### Reference when setting loglevel:
 
 `logger.SetLogLevel(log.ErrorLevel)` will log only Errors using the method log.Error*(). Any calls to `log.Warn*()`, `log.Info*()` and `log.Debug*()` will not be logged.
+
 `logger.SetLogLevel(log.WarnLevel)` will log Errors and Warnings. Rest are not logged.
+
 `logger.SetLogLevel(log.InfoLevel)` will log Errors, Warnings and Info. Rest are not logged.
+
 `logger.SetLogLevel(log.DebugLevel)` will log Errors, Warnings, Info and Debug.
 
 Note: To disable logging line numbers and file names, set the logger's flag similar to `logger := log.New(&buf, "logger: ", log.Ldate)` instead of `log.Lshortfile` or similar flags.
