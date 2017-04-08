@@ -66,6 +66,8 @@ type Logger struct {
 	loglevel int	  // for defining a loglevel for filtering when logging.
 }
 
+// SetLogLevel overrides the default loglevel of 0 (ErrorLevel) set by the New() function. 
+// This log level is used at runtime to determine if a log has to be printed.
 func (l *Logger)SetLogLevel(loglevel int) {
 	l.loglevel = loglevel
 }
