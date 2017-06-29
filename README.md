@@ -28,7 +28,7 @@ package main
 import (
 	"bytes"
 	"fmt"
-	log "https://github.com/nohupped/glog"
+	log "github.com/nohupped/glog"
 )
 
 func main() {
