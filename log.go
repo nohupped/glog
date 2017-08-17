@@ -53,6 +53,21 @@ const (
 	DebugLevel // 3
 )
 
+// standardLogLevel is the default loglevel checked when calling (Error|Warn|Info|Debug)ln(). This is
+// set to ErrorLevel(0) by default.
+var standardLogLevel = ErrorLevel
+
+// SetStandardLogLevel changes the default standardLogLevel variable from ErrorLevel to any of
+// (Warn|Info|Debug)Level. This will NOT change the loglevel inside type Logger struct.
+func SetStandardLogLevel(loglevel int){
+	if (loglevel > ErrorLevel|WarnLevel|InfoLevel|DebugLevel) || (loglevel < ErrorLevel&WarnLevel&InfoLevel&DebugLevel) {
+		fmt.Printf("Invalid loglevel %d. Must be any of %d, %d, %d or %d.", loglevel, ErrorLevel, WarnLevel,
+			InfoLevel, DebugLevel)
+		return
+	}
+	standardLogLevel = loglevel
+}
+
 // A Logger represents an active logging object that generates lines of
 // output to an io.Writer.  Each logging operation makes a single call to
 // the Writer's Write method.  A Logger can be used simultaneously from
@@ -322,8 +337,6 @@ func (l *Logger) Debugln(v ...interface{}) {
 	}
 }
 
-
-
 // Fatal is equivalent to l.Print() followed by a call to os.Exit(1).
 func (l *Logger) Fatal(v ...interface{}) {
 	l.Output(2, fmt.Sprint(v...))
@@ -426,16 +439,122 @@ func Print(v ...interface{}) {
 	std.Output(2, fmt.Sprint(v...))
 }
 
+// Error calls Output to print to the standard logger only if standardLogLevel >= constant ErrorLevel.
+// Arguments are handled in the manner of fmt.Print.
+func Error(v ...interface{}) {
+	if standardLogLevel >= ErrorLevel {
+		v = append([]interface{}{"ERROR:"}, v...)
+		std.Output(2, fmt.Sprint(v...))
+	}
+}
+
+// Warn calls Output to print to the standard logger only if standardLogLevel >= constant WarnLevel.
+// Arguments are handled in the manner of fmt.Print.
+func Warn(v ...interface{}) {
+	if standardLogLevel >= WarnLevel {
+		v = append([]interface{}{"WARN:"}, v...)
+		std.Output(2, fmt.Sprint(v...))
+	}
+}
+
+// Info calls l.Output to print to the standard logger only if standardLogLevel >= constant InfoLevel.
+// Arguments are handled in the manner of fmt.Print.
+func Info(v ...interface{}) {
+	if standardLogLevel >= InfoLevel {
+		v = append([]interface{}{"INFO:"}, v...)
+		std.Output(2, fmt.Sprint(v...))
+	}
+}
+
+// Debug calls l.Output to print to the standard logger only if standardLogLevel >= constant DebugLevel.
+// Arguments are handled in the manner of fmt.Print.
+func Debug(v ...interface{}) {
+	if standardLogLevel >= DebugLevel {
+		v = append([]interface{}{"DEBUG:"}, v...)
+		std.Output(2, fmt.Sprint(v...))	}
+}
+
 // Printf calls Output to print to the standard logger.
 // Arguments are handled in the manner of fmt.Printf.
 func Printf(format string, v ...interface{}) {
 	std.Output(2, fmt.Sprintf(format, v...))
 }
 
+// Errorf calls Output to print to the standard logger only if standardLogLevel >= constant ErrorLevel.
+// Arguments are handled in the manner of fmt.Printf.
+func Errorf(format string, v ...interface{}) {
+	if standardLogLevel >= ErrorLevel {
+		v = append([]interface{}{"ERROR:"}, v...)
+		std.Output(2, fmt.Sprintf("%s " + format, v...))
+	}
+}
+
+// Warnf calls Output to print to the standard logger only if standardLogLevel >= constant WarnLevel.
+// Arguments are handled in the manner of fmt.Printf.
+func Warnf(format string, v ...interface{}) {
+	if standardLogLevel >= WarnLevel {
+		v = append([]interface{}{"WARN:"}, v...)
+		std.Output(2, fmt.Sprintf("%s " + format, v...))
+	}
+}
+
+// Infof calls l.Output to print to the standard logger only if standardLogLevel >= constant InfoLevel.
+// Arguments are handled in the manner of fmt.Printf.
+func Infof(format string, v ...interface{}) {
+	if standardLogLevel >= InfoLevel {
+		v = append([]interface{}{"INFO:"}, v...)
+		std.Output(2, fmt.Sprintf("%s " + format, v...))
+	}
+}
+
+// Debugf calls l.Output to print to the standard logger only if standardLogLevel >= constant DebugLevel.
+// Arguments are handled in the manner of fmt.Printf.
+func Debugf(format string, v ...interface{}) {
+	if standardLogLevel >= DebugLevel {
+		v = append([]interface{}{"DEBUG:"}, v...)
+		std.Output(2, fmt.Sprintf("%s " + format, v...))	}
+}
+
 // Println calls Output to print to the standard logger.
 // Arguments are handled in the manner of fmt.Println.
 func Println(v ...interface{}) {
 	std.Output(2, fmt.Sprintln(v...))
+}
+
+// Errorln calls Output to print to the standard logger only if standardLogLevel >= constant ErrorLevel.
+// Arguments are handled in the manner of fmt.Println.
+func Errorln(v ...interface{}) {
+	if standardLogLevel >= ErrorLevel {
+		v = append([]interface{}{"ERROR:"}, v...)
+		std.Output(2, fmt.Sprintln(v...))
+	}
+}
+
+// Warnln calls Output to print to the standard logger only if standardLogLevel >= constant WarnLevel.
+// Arguments are handled in the manner of fmt.Println.
+func Warnln(v ...interface{}) {
+	if standardLogLevel >= WarnLevel {
+		v = append([]interface{}{"WARN:"}, v...)
+		std.Output(2, fmt.Sprintln(v...))
+	}
+}
+
+// Infoln calls l.Output to print to the standard logger only if standardLogLevel >= constant InfoLevel.
+// Arguments are handled in the manner of fmt.Println.
+func Infoln(v ...interface{}) {
+	if standardLogLevel >= InfoLevel {
+		v = append([]interface{}{"INFO:"}, v...)
+		Output(2, fmt.Sprintln(v...))
+	}
+}
+
+// Debugln calls l.Output to print to the standard logger only if standardLogLevel >= constant DebugLevel.
+// Arguments are handled in the manner of fmt.Println.
+func Debugln(v ...interface{}) {
+	if standardLogLevel >= DebugLevel {
+		v = append([]interface{}{"DEBUG:"}, v...)
+		Output(2, fmt.Sprintln(v...))
+	}
 }
 
 // Fatal is equivalent to Print() followed by a call to os.Exit(1).
