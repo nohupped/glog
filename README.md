@@ -47,6 +47,13 @@ func main() {
 	logger.Infoln("Hello, This is Info from Infoln!")
 	logger.Debugln("Hello, This is Debug from Debugln!") // This will not print because loglevel is set to InfoLevel
 
+	log.SetStandardLogLevel(log.DebugLevel) // set std loglevel. This will NOT set the *Logger struct's loglevel.
+	log.SetFlags(log.Lshortfile) // set flags to log. This will add short filename and line number.
+	log.Debugf("This is from %s", strfn)
+	log.Printf("%d error from %s", 1, "Error function")
+	log.Warnf("%d error from %s", 1, "Error function")
+	fmt.Println(&buf)
+
 	fmt.Print(&buf)
 
 	// Output:

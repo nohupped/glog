@@ -6,8 +6,8 @@ package glog_test
 
 import (
 	"bytes"
-	"fmt"
 	log "glog"
+	"fmt"
 )
 
 func ExampleLogger() {
@@ -25,14 +25,20 @@ func ExampleLogger() {
 	logger.Warnln("Hello, This is Warn from Warnln!")
 	logger.Infoln("Hello, This is Info from Infoln!")
 	logger.Debugln("Hello, This is Debug from Debugln!") // This will not print because loglevel is set to InfoLevel
+	log.SetStandardLogLevel(log.DebugLevel)
+	log.SetFlags(log.Lshortfile)
+	log.Debugf("This is from %s", strfn)
+	log.Printf("%d error from %s", 1, "Error function")
+	log.Warnf("%d error from %s", 1, "Error function")
+	fmt.Println(&buf)
 
-	fmt.Print(&buf)
+
 	// Output:
-	// logger: example_test.go:19: ERROR: Hello, this is 1 Error from Errorf()!
-	// logger: example_test.go:20: ERROR: Hello, this is 1 Error from Error()!
-	// logger: example_test.go:23: ERROR: Hello, This is Error from Errorln!
-	// logger: example_test.go:24: WARN: Hello, This is Warn from Warnln!
-	// logger: example_test.go:25: INFO: Hello, This is Info from Infoln!
-
+	// logger: example_test.go:20: ERROR: Hello, this is 1 Error from Errorf()!
+	// logger: example_test.go:21: ERROR: Hello, this is 1 Error from Error()!
+	// logger: example_test.go:24: ERROR: Hello, This is Error from Errorln!
+	// logger: example_test.go:25: WARN: Hello, This is Warn from Warnln!
+	// logger: example_test.go:26: INFO: Hello, This is Info from Infoln!
+	
 
 }
