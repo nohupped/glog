@@ -6,7 +6,7 @@ package glog_test
 
 import (
 	"bytes"
-	log "glog"
+	log"github.com/nohupped/glog"
 	"fmt"
 )
 
