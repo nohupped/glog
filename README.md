@@ -38,6 +38,7 @@ func init() {
     // loglevel := flag.Uint("loglevel", uint(glog.InfoLevel), "Loglevel.")
     // flag.Parse()
     // Don't do the above 2 lines in init functions. This will mess with go's testing because of https://github.com/golang/go/issues/33774.
+    // flag.Parse() and init() functions doesn't go well.
     if Loglevel == nil {
         l := log.ErrorLevel
         Loglevel = &l
