@@ -1,4 +1,4 @@
-# glog
+# glog [![Build Status](https://travis-ci.org/nohupped/glog.svg?branch=master)](https://travis-ci.org/nohupped/glog)
 
 Go's modified log package with an option to set a loglevel, which will filter the output of logs based on that.
 (This is a lame attempt to modify GO's original [`log` package](https://github.com/golang/go/tree/master/src/log) (version 1.6.2)), and the logic borrowed from [Sirupsen](https://github.com/Sirupsen/logrus) package.
