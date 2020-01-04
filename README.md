@@ -10,7 +10,7 @@ Newly added methods for `*Logger` like `(Error|Warn|Info|Debug)ln(), (Error|Warn
 
 Default value of `loglevel` at the time of initing the `*Logger` is set to the lowest level, which is `ErrorLevel`.
 
-## Breaking change of using pointer to loglevel
+## Breaking change because of using pointer to loglevel
 
 Use
 
